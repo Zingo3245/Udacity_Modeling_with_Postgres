@@ -8,27 +8,27 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 # CREATE TABLES
 
-songplay_table_create = ("""CREATE TABLE IF NOT EXISTS songplay(songplay_id varchar, start_time date, user_id int, level varchar, song_id varchar, artist_id varchar, session_id varchar, location varchar, user_agent varchar)
+songplay_table_create = ("""CREATE TABLE IF NOT EXISTS songplay(songplay_id serial PRIMARY KEY NOT NULL, start_time date NOT NULL, user_id int NOT NULL, level varchar, song_id varchar NOT NULL, artist_id varchar NOT NULL, session_id varchar, location varchar, user_agent varchar)
 """)
 
-user_table_create = ("""CREATE TABLE IF NOT EXISTS user_(user_id int, first_name varchar, last_name varchar, gender varchar, level varchar)
+user_table_create = ("""CREATE TABLE IF NOT EXISTS user_(user_id int PRIMARY KEY NOT NULL, first_name varchar, last_name varchar, gender varchar, level varchar)
 """)
 
-song_table_create = ("""CREATE TABLE IF NOT EXISTS song(song_id varchar, title varchar, artist_id varchar, year int, duration float)
+song_table_create = ("""CREATE TABLE IF NOT EXISTS song(song_id varchar PRIMARY KEY NOT NULL, title varchar, artist_id varchar NOT NULL, year int, duration float)
 """)
 
-artist_table_create = ("""CREATE TABLE IF NOT EXISTS artist(artist_id varchar, name varchar, location varchar, latitude double precision, longitude double precision)
+artist_table_create = ("""CREATE TABLE IF NOT EXISTS artist(artist_id varchar PRIMARY KEY NOT NULL, name varchar, location varchar, latitude double precision, longitude double precision)
 """)
 
-time_table_create = ("""CREATE TABLE IF NOT EXISTS time(start_time date, hour int, day int, week int, month int, year int, weekday int)
+time_table_create = ("""CREATE TABLE IF NOT EXISTS time(start_time date PRIMARY KEY NOT NULL, hour int, day int, week int, month int, year int, weekday int)
 """)
 
 # INSERT RECORDS
 
-songplay_table_insert = ("""INSERT INTO songplay(songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+songplay_table_insert = ("""INSERT INTO songplay(start_time, user_id, level, song_id, artist_id, session_id, location, user_agent) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
 """)
 
-user_table_insert = ("""INSERT INTO user_(user_id, first_name , last_name, gender, level) VALUES (%s, %s, %s, %s, %s)
+user_table_insert = ("""INSERT INTO user_(user_id, first_name , last_name, gender, level) VALUES (%s, %s, %s, %s, %s) ON CONFLICT DO NOTHING
 """)
 
 song_table_insert = ("""INSERT INTO song(song_id, title, artist_id, year, duration) VALUES (%s, %s, %s, %s, %s)

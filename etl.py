@@ -6,6 +6,13 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    """
+    Takes a json song file and inserts records into the song table and artist table.
+    
+    Keyword arguements:
+    cur -- cursor used to insert files into psycopg tables
+    filepath -- file path for the json file
+    """
     # open song file
     df = pd.read_json(filepath, lines=True)
 
@@ -23,6 +30,13 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """
+    Loads a json file for a session and inserts the record into the time, user, and songplay tables.
+    
+    Keyword arguements:
+    cur -- cursor used to insert files into psycopg tables
+    filepath -- file path for the json file
+    """
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -67,6 +81,16 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """
+    Gets all the files to be processed by the process_song_file and process_log_file functions.
+    
+    Keyword arguements:
+    cur -- cursor used to insert files into psycopg tables
+    conn -- connection to psycopg2
+    filepath -- file path for the json file
+    func -- function previously defined for processing log and song files
+    
+    """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
