@@ -18,6 +18,7 @@ This project uses python scripts that can be run from the terminal:
 
 ``
 python create_tables.py
+
 python etl.py
 ``
 
