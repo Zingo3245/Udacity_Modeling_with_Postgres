@@ -14,8 +14,8 @@ songplay_id serial PRIMARY KEY NOT NULL,
 start_time timestamp NOT NULL, 
 user_id int NOT NULL, 
 level varchar, 
-song_id varchar NOT NULL, 
-artist_id varchar NOT NULL, 
+song_id varchar, 
+artist_id varchar, 
 session_id varchar, 
 location varchar, 
 user_agent varchar
@@ -84,7 +84,11 @@ time_table_insert = ("""INSERT INTO time(start_time, hour, day, week, month, yea
 
 # FIND SONGS
 
-song_select = ("""SELECT song_id, A.artist_id FROM song A JOIN artist B ON A.artist_id=B.artist_id
+song_select = ("""SELECT song_id, A.artist_id 
+FROM song A 
+JOIN artist B 
+ON A.artist_id=B.artist_id
+WHERE A.title=%s AND B.name=%s AND A.duration=%s
 """)
 
 # QUERY LISTS
