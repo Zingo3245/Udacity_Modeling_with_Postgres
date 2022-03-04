@@ -8,7 +8,9 @@ Clone the github repo and use pip install to install the required libraries
 
 ``
         git clone https://github.com/Zingo3245/Udacity_Modeling_with_Postgres
+        
         cd Udacity_Modeling_with_Postgres
+        
         pip install -r requirements.txt
 ``
 
@@ -18,6 +20,7 @@ This project uses python scripts that can be run from the terminal:
 
 ``
         python create_tables.py
+        
         python etl.py
 ``
 
